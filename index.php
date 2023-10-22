@@ -21,15 +21,42 @@ require_once 'cont/autoload.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
+                <button type="button" class="btn btn-primary" onclick="showToast()">Show Toast</button>
             </div>
             <div class="col-md-8">
             </div>
         </div>
     </div>
 
+    <!-- Toasts -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastContainer"></div>
+    </div>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
+    <script>
+        function showToast(error,meldung) {
+            var toastContainer = document.getElementById('toastContainer');
+            var bgClass = error ? 'bg-warning' : 'bg-success';
+            var toast = `
+                <div class="toast align-items-center text-white `+bgClass+` border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">`+meldung+`</div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            toastContainer.innerHTML += toast;
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl);
+            });
+            toastList[toastList.length - 1].show();
+        }
+    </script>
 </body>
 </html>

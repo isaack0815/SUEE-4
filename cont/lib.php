@@ -10,4 +10,9 @@ function Classloader($class,$admin = false){
     return new $class();
 }
 
+function meldung($nachricht,$error) {
+    echo "<script>var nachricht = $js_nachricht; var error = $js_error;</script>";
+}
+
+
 ?>
