@@ -19,11 +19,10 @@ require_once 'cont/autoload.php';
 </head>
 <body>
     <div class="container-fluid">
+        <?php if($template->header == 'header'){require_once 'template/header.php';} ?>
         <div class="row">
-            <div class="col-md-4">
-                <button type="button" class="btn btn-primary" onclick="showToast()">Show Toast</button>
-            </div>
-            <div class="col-md-8">
+            <?php if($template->header == 'sidebar'){require_once 'template/sidebar.php';} ?>
+            <div class="col">
             </div>
         </div>
     </div>
