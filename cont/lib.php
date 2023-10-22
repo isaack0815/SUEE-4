@@ -1,18 +1,13 @@
 <?php
 
 function Classloader($class,$admin = false){
-    $admindir = '';
-    if($admin == true){
-        $admindir = 'admin/';
+    $adminDir = $admin ? 'admin/' : '';
+    $classPath = $adminDir . 'cont/' . $class . '.php';
+    if (!file_exists($classPath)) {
+        return false;
     }
-    if(file_exists($admindir.'cont/'.$class.'.php')){
-        require_once $admindir.'cont/'.$class.'.php';
-        $reg = new $class;
-    }else{
-        $reg = false;
-    }
-
-    return $reg;
+    require_once $classPath;
+    return new $class();
 }
 
 ?>
