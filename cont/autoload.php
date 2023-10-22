@@ -1,5 +1,6 @@
 <?php
 
+//Datenbank anbindung erstellen
 
 
 ?>
