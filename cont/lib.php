@@ -2,12 +2,13 @@
 
 function Classloader($class,$admin = false){
     $adminDir = $admin ? 'admin/' : '';
-    $classPath = $adminDir . 'cont/' . $class . '.php';
+    $classPath = DIR_FS . $adminDir . 'cont/class/' . $class . '.class.php';
     if (!file_exists($classPath)) {
         return false;
+    }else{
+        require_once $classPath;
+        return new $class();
     }
-    require_once $classPath;
-    return new $class();
 }
 
 function meldung($nachricht,$error) {

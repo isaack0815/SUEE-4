@@ -1,0 +1,5 @@
+1. Alle Datein auf deinen Webspace hochladen
+2. MySQL Datei in deine Datenbank hochladen
+3. Einstellungen in der con/config.php vornehmen
+
+4. Script nutzen und fertig :-)

@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
+session_start();
+
 require_once 'cont/config.php';
 require_once 'cont/lib.php';
 require_once 'cont/autoload.php';
@@ -9,7 +11,6 @@ require_once 'cont/autoload.php';
 deleteOldLogFiles();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -17,16 +18,17 @@ deleteOldLogFiles();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap 5 Template</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
     <!-- Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css" integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <?php if($template->header == 'header'){require_once 'template/header.php';} ?>
+    <div class="container-fluid" style="margin-top: 25px;">
+        <?php echo $NavClass->GetMenu(true); ?>
         <div class="row">
-            <?php if($template->header == 'sidebar'){require_once 'template/sidebar.php';} ?>
+            <?php echo $NavClass->GetMenu(); ?>
             <div class="col">
+            
             </div>
         </div>
     </div>
@@ -37,9 +39,9 @@ deleteOldLogFiles();
     </div>
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" ></script>
 
     <script>
         function showToast(error,meldung) {

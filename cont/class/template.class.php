@@ -9,15 +9,14 @@ class template{
         $this->db = $db;
     }
 
-    private function get_template_setting(){
-        $sql = "SELECT * FROM template_setting";
-        $result = $this->db->query($sql);
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            return $row;
-        }else{
-            $this->error = 1;
-            return false;
+    public function get_template_setting(){
+        $ret = new stdClass();
+        foreach($this->db->get_results("SELECT * FROM template_setting") as $row){
+           $ret->{$row->TempKey} = $row->TempValue;
         }
+
+        return $ret;
     }
 }
+
+?>

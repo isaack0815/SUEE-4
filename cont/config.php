@@ -1,18 +1,18 @@
 <?php
 
 const DB_HOST = 'localhost';
-const DB_USER = '';
-const DB_PASS = '';
-const DB_NAME = '';
+const DB_USER = 'd03e81bb';
+const DB_PASS = 'DdhmdCkQoYGSHopKfxE8';
+const DB_NAME = 'd03e81bb';
 
-const DIR_FS = __DIR__ . '/';
+const DIR_FS = '/www/htdocs/w01ddc0a/suee4.klebehumor.de/SUEE-4/';
 const ADMIN_DIR = 'admin/';
 const TEMPLATE_DIR = DIR_FS . 'template/';
 
 
 if(file_exists($_SERVER['DOCUMENT_ROOT'].'/error')){
 	error_reporting(E_ALL);
-	ini_set('display_errors', 'Off');
+	ini_set('display_errors', 'On');
 	ini_set('error_log', $_SERVER['DOCUMENT_ROOT'].'/error/error-'. date("d.m.Y",time()).'.log');
 	ini_set('log_errors', 'On');
 	if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/error/error-'. date("d.m.Y",time()).'.log')){
