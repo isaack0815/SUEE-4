@@ -11,8 +11,12 @@ function Classloader($class,$admin = false){
     }
 }
 
-function meldung($nachricht,$error) {
-    echo "<script>var nachricht = $js_nachricht; var error = $js_error;</script>";
+function meldung($js_nachricht,$js_error) {
+    echo "
+        <script>
+            var nachricht = '$js_nachricht'; var error = $js_error;
+            document.addEventListener(\"DOMContentLoaded\", function () { showToast(error,nachricht); });
+        </script>";
 }
 
 

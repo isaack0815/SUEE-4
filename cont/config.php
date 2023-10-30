@@ -9,6 +9,8 @@ const DIR_FS = '/www/htdocs/w01ddc0a/suee4.klebehumor.de/SUEE-4/';
 const ADMIN_DIR = 'admin/';
 const TEMPLATE_DIR = DIR_FS . 'template/';
 
+const PASS_AD = 'JEB7980jebI';
+
 
 if(file_exists($_SERVER['DOCUMENT_ROOT'].'/error')){
 	error_reporting(E_ALL);

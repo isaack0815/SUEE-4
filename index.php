@@ -28,7 +28,7 @@ deleteOldLogFiles();
         <div class="row">
             <?php echo $NavClass->GetMenu(); ?>
             <div class="col">
-            
+                <?php $PageClass->GetPage($_GET['page']); ?>
             </div>
         </div>
     </div>

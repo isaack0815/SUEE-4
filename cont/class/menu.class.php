@@ -6,33 +6,24 @@ class menu{
     private $meldung;
     private $session;
     private $templateSetting;
+    private $gconfig;
 
     public function __construct(){
-        global $db,$_SESSION,$template;
+        global $db,$_SESSION,$template,$gconfig;
         $this->db = $db;
         $this->session = $_SESSION;
         $this->templateSetting = $template;
+        $this->gconfig = $gconfig;
     }
 
     private function GetLinkList($id){
         $ret = '';
         foreach($this->db->get_results("SELECT * FROM MainMenu WHERE child_from = ". $id ." AND active = 1 ORDER BY LinkOrder") as $row){
             if($this->db->num_rows("SELECT * FROM MainMenu WHERE child_from = ". $row->id ." AND active = 1") > 0){
-                $ret .= '<div class="card">';
-                $ret .= '<div class="card-header">'. $row->LinkName .'</div>';
-                $ret .= '<div class="card-body">';
-                $ret .= $this->GetLinkList($row->LinkID);
-                $ret .= '</div>';
-                $ret .= '</div>';
+                $ret .= Menuhead($_SESSION[$_SESSION['lang']][$row->BoxTitel], $this->GetLinkList($row->id));
             }else{
-                $icon = '';
-                if($row->LinkIcon != '0'){
-                    $icon = '<i class="bi bi-'. $row->LinkIcon .'"></i> ';
-                }
-                $ret .= '<a href="'. $row->LinkURL .'" class="btn btn-primary">'. $icon .' '. $row->LinkName .'</a><br>';
+                $ret .= Menulinks($row->LinkURL, $_SESSION[$_SESSION['lang']][$row->LinkName], $row->LinkIcon);
             }
-
-            return $ret;
         }
 
         return $ret;
@@ -41,13 +32,11 @@ class menu{
     private function GetNavAsSidebar(){
         $ret = '';
         if($this->session['login'] == true){ $LinkLogin = 1; }else{ $LinkLogin = 0; }
+        foreach($this->db->get_results("SELECT * FROM boxes WHERE BoxLocation = 'navigation' AND BoxVisibleFor = '". $LinkLogin ."' OR BoxVisibleFor = '2' ORDER by BoxOrder") as $row){
+            $ret .= Menuhead($_SESSION[$_SESSION['lang']][$row->BoxTitel], require_once(TEMPLATE_DIR. 'boxes/'.$row->BoxFile));
+        }
         foreach($this->db->get_results("SELECT * FROM MainMenu WHERE child_from = 0 AND active = 1 AND LinkLogin = ". $LinkLogin ." ORDER BY LinkOrder") as $row){
-            $ret .= '<div class="card">';
-            $ret .= '<div class="card-header">'. $row->LinkName .'</div>';
-            $ret .= '<div class="card-body">';
-            $ret .= $this->GetLinkList($row->id);
-            $ret .= '</div>';
-            $ret .= '</div>';
+            $ret .= Menuhead($_SESSION[$_SESSION['lang']][$row->LinkName],$this->GetLinkList($row->id));
         }
 
         return $ret;
@@ -56,7 +45,7 @@ class menu{
     private function GetLinkListHeader($id){
         $ret = '';
         foreach($this->db->get_results("SELECT * FROM MainMenu WHERE child_from = ". $id ." AND active = 1 ORDER BY LinkOrder") as $row){
-            $ret .= '<li><a class="dropdown-item" href="'. $row->LinkURL .'">'. $row->LinkName .'</a></li>';
+            $ret .= '<li><a class="dropdown-item" href="'. $row->LinkURL .'">'. $_SESSION[$_SESSION['lang']][$row->LinkName] .'</a></li>';
         }
     }
 
@@ -68,7 +57,7 @@ class menu{
         if($this->session['login'] == true){ $LinkLogin = 1; }else{ $LinkLogin = 0; }
         foreach($this->db->get_results("SELECT * FROM MainMenu WHERE child_from = 0 AND active = 1 AND LinkLogin = ". $LinkLogin ." ORDER BY LinkOrder") as $row){
             $ret .= '<li class="nav-item">';
-            $ret .= '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">'. $row->LinkName .'</a>';
+            $ret .= '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">'. $_SESSION[$_SESSION['lang']][$row->LinkName] .'</a>';
             $ret .= '<ul class="dropdown-menu">';
             $ret .= $this->GetLinkListHeader($row->LinkID);
             $ret .= '</ul>';
