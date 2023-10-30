@@ -3,3 +3,8 @@
 3. Einstellungen in der con/config.php vornehmen
 
 4. Script nutzen und fertig :-)
+
+Nutzerdaten:
+
+Nutzername: keine@keine.de
+Passwort: 123456789
