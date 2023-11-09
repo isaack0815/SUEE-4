@@ -4,6 +4,8 @@ ini_set('display_errors', 'On');
 
 session_start();
 
+$AdminFolder = false;
+
 require_once 'cont/config.php';
 require_once 'cont/lib.php';
 require_once 'cont/autoload.php';

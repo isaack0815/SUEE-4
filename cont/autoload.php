@@ -13,6 +13,14 @@ $gconfig = $db->get_row("SELECT * FROM GlobalConfig",true);
 //Session laden
 require_once DIR_FS . 'cont/session.lib.php';
 
+//Check Admin Folder und Permission
+if($AdminFolder == true){
+    if(!isset($_SESSION['login']) || $_SESSION['login'] != true || $_SESSION['admin'] != 1){
+        header('Location: ../index.php');
+        exit;
+    }
+}
+
 //Laden der Language
 require_once DIR_FS . 'cont/language.lib.php';
 

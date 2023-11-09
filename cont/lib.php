@@ -1,7 +1,7 @@
 <?php
 
 function Classloader($class,$admin = false){
-    $adminDir = $admin ? 'admin/' : '';
+    $adminDir = $admin ? ADMIN_DIR : '';
     $classPath = DIR_FS . $adminDir . 'cont/class/' . $class . '.class.php';
     if (!file_exists($classPath)) {
         return false;

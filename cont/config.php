@@ -6,7 +6,7 @@ const DB_PASS = 'DdhmdCkQoYGSHopKfxE8';
 const DB_NAME = 'd03e81bb';
 
 const DIR_FS = '/www/htdocs/w01ddc0a/suee4.klebehumor.de/SUEE-4/';
-const ADMIN_DIR = 'admin/';
+const ADMIN_DIR = 'admin1234/';
 const TEMPLATE_DIR = DIR_FS . 'template/';
 
 const PASS_AD = 'JEB7980jebI';
